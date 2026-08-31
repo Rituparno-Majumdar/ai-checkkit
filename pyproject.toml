@@ -1,10 +1,10 @@
 [build-system]
-requires = ["setuptools>=77", "wheel"]
+requires = ["setuptools>=77", "wheel", "setuptools_scm>=8"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "ai-checkkit"
-version = "0.1.0"
+dynamic = ["version"]
 description = "AI-era Python lint bundle: stubcheck + assertcheck + shadowcheck + mutablecheck — catch silent stubs, vanishing asserts, builtin shadowing, mutable defaults"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -57,6 +57,10 @@ Issues = "https://github.com/Rituparno-Majumdar/ai-checkkit/issues"
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools_scm]
+write_to = "src/ai_checkkit/_version.py"
+fallback_version = "0.1.1.dev0"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

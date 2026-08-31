@@ -1,0 +1,22 @@
+name: Auto Tag on Version Bump
+on:
+  push:
+    branches: [master, main]
+    paths: ["pyproject.toml", "src/**"]
+jobs:
+  tag:
+    if: "!contains(github.event.head_commit.message, '[skip tag]')"
+    runs-on: ubuntu-latest
+    permissions: { contents: write }
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0, token: "${{ secrets.GITHUB_TOKEN }}" }
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - run: pip install setuptools_scm
+      - id: ver
+        run: echo "version=$(python -m setuptools_scm)" >> $GITHUB_OUTPUT
+      - run: |
+          echo "Current SCM version: ${{ steps.ver.outputs.version }}"
+          # If you want manual tags: git tag will be used, not auto-tag
+          # This job just verifies setuptools_scm works - publish still needs: git tag vX.Y.Z && git push origin vX.Y.Z
