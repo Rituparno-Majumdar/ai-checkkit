@@ -1,5 +1,6 @@
 """mutablecheck — detect mutable default arguments (the classic aliasing footgun)."""
 
+from __future__ import annotations
 import argparse
 import ast
 import json

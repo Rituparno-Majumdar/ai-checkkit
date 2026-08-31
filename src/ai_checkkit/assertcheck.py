@@ -1,5 +1,6 @@
 """assertcheck — detect assert statements used for runtime validation (silently stripped under python -O)."""
 
+from __future__ import annotations
 import argparse
 import ast
 import json

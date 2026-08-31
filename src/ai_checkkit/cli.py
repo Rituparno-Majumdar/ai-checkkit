@@ -1,5 +1,6 @@
 """ai-checkkit unified CLI — dispatches to stubcheck/assertcheck/shadowcheck/mutablecheck."""
 
+from __future__ import annotations
 import argparse
 import json
 import sys

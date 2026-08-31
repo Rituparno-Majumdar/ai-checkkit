@@ -1,5 +1,6 @@
 """shadowcheck — detect identifiers that shadow Python builtins."""
 
+from __future__ import annotations
 import argparse
 import ast
 import builtins

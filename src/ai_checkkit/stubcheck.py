@@ -1,5 +1,6 @@
 """stubcheck — detect silent no-op function stubs that ship to production."""
 
+from __future__ import annotations
 import argparse
 import ast
 import json
