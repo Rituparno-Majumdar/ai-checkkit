@@ -8,6 +8,10 @@ import json
 import os
 import sys
 from dataclasses import dataclass
+
+# Python 3.9 compat: _MatchAs was added in 3.10
+_MatchAs = getattr(ast, "MatchAs", None)
+_MatchStar = getattr(ast, "MatchStar", None)
 from pathlib import Path
 
 NOISE = {
@@ -96,7 +100,7 @@ class ShadowScanner:
                     self._flag(a, a.asname or a.name, "import")
         elif kind in (ast.ListComp, ast.SetComp, ast.DictComp, ast.GeneratorExp):
             self._bind([g.target for g in node.generators], "comprehension")
-        elif kind in (ast.MatchAs, ast.MatchStar):
+        elif kind in (_MatchAs, _MatchStar):
             if node.name:
                 self._flag(node, node.name, "pattern")
         elif kind is ast.MatchMapping and node.rest:
